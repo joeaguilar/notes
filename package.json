@@ -1,0 +1,16 @@
+{
+	"name": "notes",
+	"version": "0.0.1",
+	"description": "A program to manage my notes",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"run": "node ./index.js",
+		"test": "echo \"heh, tests\""
+	},
+	"keywords": [
+		"notes"
+	],
+	"author": "Josef Aguilar",
+	"license": "MIT"
+}
