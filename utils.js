@@ -14,7 +14,7 @@ const isValidNoteDate = (suspectDate) => {
 
 const formatDateAfterSplit = (acc, val, index) => {
 	if (isValidNoteDate(val)) {
-		acc[index + 1] = { val: acc[index + 1], date: val };
+		acc[index + 1] = { text: acc[index + 1], date: val };
 	} else {
 		acc[index] = val;
 	}
@@ -40,17 +40,23 @@ const countOccurrencesWithReduce = (acc, tag) => {
 const identifyAllKeysFactory =
 	(regex, handleUnwrap, shouldCount) =>
 	(noteObject = {}) => {
-		const { val } = noteObject || {};
-		const results = val?.match(regex)?.map(handleUnwrap);
+		const { text } = noteObject || {};
+		const results = text?.match(regex)?.map(handleUnwrap);
+
 		return shouldCount
 			? results?.reduce(countOccurrencesWithReduce, []) || []
 			: results;
 	};
 
 const getAllTags = (noteObject = {}) => {
-	const tagFinder = identifyAllKeysFactory(TAG_REGEX, unwrapTagTemplate);
+	const tagFinder = identifyAllKeysFactory(
+		TAG_REGEX,
+		unwrapTagTemplate,
+		true
+	);
 	const tags = tagFinder(noteObject);
 	noteObject.tags = tags;
+
 	return noteObject;
 };
 

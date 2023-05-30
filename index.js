@@ -1,8 +1,15 @@
 import fs from "fs";
+import path from "path";
 import { getNoteTextData } from "./utils.js";
+import EJSGlobalEnvPolyfill from "./EJSGlobalEnvPolyfill.js";
 
 const NOTE_FILE = "notes.java";
-const OUTPUT_JSON_FILE = "notes.json";
+const OUTPUT_JSON_FILE =
+	EJSGlobalEnvPolyfill.__dirname +
+	path.sep +
+	"note-viewer" +
+	path.sep +
+	"notes.json";
 
 const fileFetch = async (filePath = "") => {
 	return await fs.promises.readFile(filePath, { encoding: "utf-8" });
